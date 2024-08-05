@@ -13,20 +13,20 @@ A trick I have during my journey of learning/sharpening my skills is that it's i
 
 Can you solve this puzzle? 
 
-An ant leaves its anthill in order to forage for food. It moves with the speed of 10cm per second, but it doesn't know where to go, therefore every second it moves randomly 10cm directly north, south, east or west with equal probability.
+An ant leaves its anthill in order to forage for food. It moves with the speed of **10cm per second**, but it doesn't know where to go, therefore every second it moves randomly 10cm directly north, south, east or west with equal probability.
 
-If the food is located on east-west lines 20cm to the north and 20cm to the south, as well as on north-south lines 20cm to the east and 20cm to the west from the anthill, how long will it take the ant to reach it on average?
+If the food is located on east-west lines **20cm** to the north and 20cm to the south, as well as on north-south lines **20cm** to the east and 20cm to the west from the anthill, how long will it take the ant to reach it on average?
 
-What is the average time the ant will reach food if it is located only on a diagonal line passing through (10cm, 0cm) and (0cm, 10cm) points?
+What is the average time the ant will reach food if it is located only on a diagonal line passing through **(10cm, 0cm)** and **(0cm, 10cm)** points?
 
-Can you write a program that comes up with an estimate of average time to find food for any closed boundary around the anthill? What would be the answer if food is located outside an area defined by ( (x – 2.5cm) / 30cm )2 + ( (y – 2.5cm) / 40cm )2 < 1 in coordinate system where the anthill is located at (x = 0cm, y = 0cm)? Provide us with a solution rounded to the nearest integer.
+Can you write a program that comes up with an estimate of average time to find food for any closed boundary around the anthill? What would be the answer if food is located outside an area defined by **( (x – 2.5cm) / 30cm )2 + ( (y – 2.5cm) / 40cm )2 < 1** in coordinate system where the anthill is located at **(x = 0cm, y = 0cm)?** Provide us with a solution rounded to the nearest integer.
 
 
-The goal of this notebook
+# The goal of this notebook
 
 Here are my solutions for the Optiver challenge regarding the amount of time it would take an ant to encounter food in various scenarios. Specifically, the question states:
 
-An ant leaves its anthill in order to forage for food. It moves with the speed of 10 cm per second, but it doesn't know where to go, therefore every second it moves randomly 10 cm directly north, south, east or west with equal probability.
+An ant leaves its anthill in order to forage for food. It moves with the speed of **10 cm per second**, but it doesn't know where to go, therefore every second it moves randomly **10 cm** directly north, south, east or west with equal probability.
 
 First lets take a deep breath and import the libraries we need!
 
@@ -36,7 +36,7 @@ from abc import ABC, abstractmethod
 from progressbar import ProgressBar
 ```
 
-To solve the various subquestions, we first define a base_ant_random_walk class, which we will use as a foundation for the various wandering ant scenarios (such as encoding the wandering behavior).
+To solve the various subquestions, we first define a **base_ant_random_walk class**, which we will use as a foundation for the various wandering ant scenarios (such as encoding the wandering behavior).
 
 
 ```Python
@@ -115,8 +115,8 @@ class base_ant_random_walk(ABC):
 ## Question 1
 **The first question states:**
 
-If the food is located on east-west lines 20 cm to the north and 20 cm to the south, as well as on north-south lines 20 cm to the east and 20 cm to the west from the anthill, how long will it take the ant to reach it on average?
-We have already prescribed the random walk behavior in base_ant_random_walk, so to solve this question numerically we just need to specify the boundary condition. If |x| ≥ 20 or |y| ≥ 20, the ant will have reached or crossed the boundaries, and therefore reached the food.
+If the food is located on east-west lines **20 cm** to the north and 20 cm to the south, as well as on north-south lines **20 cm** to the east and 20 cm to the west from the anthill, how long will it take the ant to reach it on average?
+We have already prescribed the random walk behavior in base_ant_random_walk, so to solve this question numerically we just need to specify the boundary condition. **If |x| ≥ 20 or |y| ≥ 20**, the ant will have reached or crossed the boundaries, and therefore reached the food.
 
 ```Python
 class ant_random_walk_question_1(base_ant_random_walk):
@@ -144,8 +144,8 @@ After 1000 seconds, it takes the ant 4.50±0.01 seconds to encounter food. In th
 # Question 2
 **The second question states:**
 
-What is the average time the ant will reach food if it is located only on a diagonal line passing through (10cm, 0cm) and (0cm, 10cm) points?
-The boundary condition for this question is that the food is found at x + y = 10, which we can easily encode in the boundary_condition function.
+What is the average time the ant will reach food if it is located only on a diagonal line passing through **(10cm, 0cm)** and **(0cm, 10cm)** points?
+The boundary condition for this question is that the food is found at **x + y = 10**, which we can easily encode in the boundary_condition function.
 
 ```Python
 class ant_random_walk_question_2(base_ant_random_walk):
@@ -192,13 +192,13 @@ In this time, 99.23% of ants have reached the food.
 **The final question comes in two parts, where the first asks:**
 
 Can you write a program that comes up with an estimate of average time to find food for any closed boundary around the anthill?
-In the current form of the code this is already achieved, as in principle any closed boundary can be specified around the anthill through the boundary_condition function in base_ant_random_walk. Therefore, we shall now proceed to the second part, which asks:
+In the current form of the code this is already achieved, as in principle any closed boundary can be specified around the anthill through the boundary_condition function in **base_ant_random_walk**. Therefore, we shall now proceed to the second part, which asks:
 
-What would be the answer if food is located outside an defined by ( (x – 2.5cm) / 30cm )2 + ( (y – 2.5cm) / 40cm )2 < 1 in coordinate system where the anthill is located at (x = 0cm, y = 0cm)? Provide us with a solution rounded to the nearest integer.
-The notation is not entirely clear, but we will assume that the boundary indicates a elipse centered at (0, 0) following the following equation: 
+What would be the answer if food is located outside an defined by **( (x – 2.5cm) / 30cm )2 + ( (y – 2.5cm) / 40cm )2 < 1** in coordinate system where the anthill is located at **(x = 0cm, y = 0cm)?** Provide us with a solution rounded to the nearest integer.
+The notation is not entirely clear, but we will assume that the boundary indicates a elipse centered at **(0, 0)** following the following equation: 
 
 
-((x - 2.5)/30)^2 + ((x - 2.5)/40)^2 < 1
+**((x - 2.5)/30)^2 + ((x - 2.5)/40)^2 < 1**
 
 ```Python
 class ant_random_walk_question_3(base_ant_random_walk):
